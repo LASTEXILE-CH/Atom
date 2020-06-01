@@ -5,7 +5,7 @@ local function InitGameMode(self)
 end
 
 local function OnThink(self)
-	print("OnThink ".."BaseGameMode")
+	--print("OnThink ".."BaseGameMode")
 	return 1
 end
 

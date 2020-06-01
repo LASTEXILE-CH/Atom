@@ -5,7 +5,7 @@ local function InitGameMode(self)
 end
 
 local function OnThink(self)
-    print("OnThink ".."GameModePVPHandler")
+    --print("OnThink ".."GameModePVPHandler")
     return 1
 end
 

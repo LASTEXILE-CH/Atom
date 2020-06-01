@@ -12,7 +12,7 @@ end
 
 local function OnThink(self)
     base:OnThink()
-    print("OnThink ".."GameModePVP")
+    --print("OnThink ".."GameModePVP")
     if self.Handler ~= nil then
         self.Handler:OnThink()
     end
