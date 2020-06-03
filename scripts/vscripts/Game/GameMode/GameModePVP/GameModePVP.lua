@@ -32,8 +32,45 @@ local function EndGame(self)
     end
 end
 
+local function OnPlayerEnter(self, player)
+    base:OnPlayerEnter(player)
+    print("OnPlayerEnter ".."GameModePVP")
+    if self.Handler ~= nil then
+        self.Handler:OnPlayerEnter(player)
+    end
+end
+
+local function OnPlayerExit(self, player)
+    base:OnPlayerExit(player)
+    print("OnPlayerExit ".."GameModePVP")
+    if self.Handler ~= nil then
+        self.Handler:OnPlayerExit(player)
+    end
+end
+
+local function OnHeroEnter(self, hero)
+    base:OnHeroEnter(player)
+    print("OnHeroEnter ".."GameModePVP")
+    if self.Handler ~= nil then
+        self.Handler:OnHeroEnter(hero)
+    end
+end
+
+local function OnHeroExit(self, hero)
+    base:OnHeroExit(player)
+    print("OnHeroExit ".."GameModePVP")
+    if self.Handler ~= nil then
+        self.Handler:OnHeroExit(hero)
+    end
+end
+
 GameModePVP.__init = InitGameMode
 GameModePVP.__delete = EndGame
 GameModePVP.OnThink = OnThink
+
+GameModePVP.OnPlayerEnter = OnPlayerEnter
+GameModePVP.OnPlayerExit = OnPlayerExit
+GameModePVP.OnHeroEnter = OnHeroEnter
+GameModePVP.OnHeroExit = OnHeroExit
 
 return GameModePVP

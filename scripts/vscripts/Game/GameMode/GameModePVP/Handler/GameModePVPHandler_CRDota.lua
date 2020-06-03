@@ -11,12 +11,7 @@ local function InitGameMode(self)
     SetTeamCustomHealthbarColor(DOTA_TEAM_CUSTOM_1, 128,255,128)
     SetTeamCustomHealthbarColor(DOTA_TEAM_CUSTOM_2, 128,255,128)
     
-    ListenToGameEvent("player_connect_full", Dynamic_Wrap(GameModePVPHandler_CRDota,"OnPlayerConnectFull" ),self)
-    ListenToGameEvent('player_connect', Dynamic_Wrap(GameModePVPHandler_CRDota, 'OnPlayerConnect'), self)
-    ListenToGameEvent("player_disconnect", Dynamic_Wrap(GameModePVPHandler_CRDota, "OnPlayerDisconnect"), self)
-    ListenToGameEvent("player_reconnected", Dynamic_Wrap(GameModePVPHandler_CRDota, "OnPlayerReconnected"), self)
-    ListenToGameEvent("player_chat",Dynamic_Wrap(GameModePVPHandler_CRDota,"OnPlayerChat"),self)
-    ListenToGameEvent("dota_player_pick_hero",Dynamic_Wrap(GameModePVPHandler_CRDota,"OnPlayerPickHero"),self)
+    
     ListenToGameEvent("entity_killed", Dynamic_Wrap(GameModePVPHandler_CRDota, "OnEntityKilled"), self)
     ListenToGameEvent("dota_player_gained_level", Dynamic_Wrap(GameModePVPHandler_CRDota,"OnPlayerGainedLevel"), self)
     --ListenToGameEvent( "npc_spawned", Dynamic_Wrap(GameModePVPHandler_CRDota, "OnNPCSpawned"), self)
@@ -30,6 +25,9 @@ local function InitGameMode(self)
     GameRules:SetPostGameTime(10.0)
     GameRules:SetStrategyTime(0.0)
     GameRules:SetShowcaseTime(0.0)
+    --GameRules:SetTimeOfDay(0.8)
+    --GameRules:IsCheatMode()
+    --GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
     --GameRules:SetHideKillMessageHeaders(true)
     --GameRules:SetUseUniversalShopMode(true)
     
@@ -52,9 +50,9 @@ local function InitGameMode(self)
 	-- GameRules:GetGameModeEntity():SetFountainPercentageManaRegen(0)
     -- GameRules:GetGameModeEntity():SetFountainConstantManaRegen(0)
     
-    GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(GameModePVPHandler_CRDota, "OnDamageFilter"), self)
-    GameRules:GetGameModeEntity():SetHealingFilter(Dynamic_Wrap(GameModePVPHandler_CRDota, "OnHealingFilter"), self)
-    GameRules:GetGameModeEntity():SetExecuteOrderFilter(Dynamic_Wrap(GameModePVPHandler_CRDota, "OnExecuteOrderFilter"), GameModePVPHandler_CRDota )
+    --GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(GameModePVPHandler_CRDota, "OnDamageFilter"), self)
+    --GameRules:GetGameModeEntity():SetHealingFilter(Dynamic_Wrap(GameModePVPHandler_CRDota, "OnHealingFilter"), self)
+    --GameRules:GetGameModeEntity():SetExecuteOrderFilter(Dynamic_Wrap(GameModePVPHandler_CRDota, "ExecuteOrderFilter"), GameModePVPHandler_CRDota )
 
     --GameRules:GetGameModeEntity():SetUseCustomHeroLevels(true)
 	--GameRules:GetGameModeEntity():SetCustomHeroMaxLevel(16)
@@ -79,10 +77,10 @@ local function InitGameMode(self)
     -- 	}
     
     --Custom Data
-    GameRules:GetGameModeEntity().PlayerIDToSteamID = {}
-    GameRules:GetGameModeEntity().SteamID2PlayerID = {}
-    GameRules:GetGameModeEntity().Steamid2Name = {}
-    GameRules:GetGameModeEntity().UserIDToPlayer = {}
+    --GameRules:GetGameModeEntity().PlayerIDToSteamID = {}
+    --GameRules:GetGameModeEntity().SteamID2PlayerID = {}
+    --GameRules:GetGameModeEntity().Steamid2Name = {}
+    --GameRules:GetGameModeEntity().UserIDToPlayer = {}
 end
 
 local function OnThink(self)
@@ -96,52 +94,11 @@ local function EndGame(self)
 	print("EndGame ".."GameModePVPHandler_CRDota")
 end
 
---Event
---player_connect_full
---PlayerID: PlayerResource:GetSteamID() | PlayerResource:GetPlayerName()
---userid
---index : EntIndexToHScript()
-local function OnPlayerConnectFull(self, eventInfo)
-    print("OnPlayerConnectFull")
-    print("PlayerResource:GetPlayerName()"..PlayerResource:GetPlayerName(eventInfo.PlayerID))
-    print("PlayerResource:GetSteamID()".. tostring(PlayerResource:GetSteamID(eventInfo.PlayerID)))
-end
-
---player_connect
-local function OnPlayerConnect(self, eventInfo)
-    print("OnPlayerConnect")
-end
-
---player_disconnect
---PlayerID
-local function OnPlayerDisconnect(self, eventInfo)
-    print("OnPlayerDisconnect")
-end
-
---player_reconnected
---PlayerID ( short )
-local function OnPlayerReconnected(self, eventInfo)
-    print("OnPlayerReconnected")
-end
-
---player_chat: a public player chat
---teamonly ( bool ): true if team only chat
---userid( short ): chatting player
---text( string ): chat text
-local function OnPlayerChat(self, eventInfo)
-    print("OnPlayerChat:"..tostring(eventInfo.userid))
-    print("OnPlayerChat:"..tostring(eventInfo.text))
-end
-
---dota_player_pick_hero
+--dota_player_gained_level
 --player ( short )
---heroindex ( short )
---hero ( string )
-local function OnPlayerPickHero(self, eventInfo)
-    print("OnPlayerPickHero")
-    if IsServer() == true then
-
-    end
+--level ( short )
+local function OnPlayerGainedLevel(self, eventInfo)
+    print("OnPlayerGainedLevel")
 end
 
 --entity_killed
@@ -153,17 +110,17 @@ local function OnEntityKilled(self, eventInfo)
     print("OnEntityKilled")
 end
 
---dota_player_gained_level
---player ( short )
---level ( short )
-local function OnPlayerGainedLevel(self, eventInfo)
-    print("OnPlayerGainedLevel")
-end
-
 --entindex_target_const
 --heal
 local function OnHealingFilter(self, eventInfo)
     print("OnHealingFilter")
+    return true
+end
+
+--entindex_target_const
+--heal
+local function OnExecuteOrderFilter(self, eventInfo)
+    print("OnExecuteOrderFilter")
     return true
 end
 
@@ -180,22 +137,41 @@ local function ExecuteOrderFilter(self, eventInfo)
 	return true
 end
 
+local function OnPlayerEnter(self, player)
+    base:OnPlayerEnter(player)
+	print("OnPlayerEnter ".."GameModePVPHandler_CRDota")
+end
+
+local function OnPlayerExit(self, player)
+    base:OnPlayerExit(player)
+	print("OnPlayerExit ".."GameModePVPHandler_CRDota")
+end
+
+local function OnHeroEnter(self, hero)
+    base:OnHeroEnter(player)
+	print("OnHeroEnter ".."GameModePVPHandler_CRDota")
+end
+
+local function OnHeroExit(self, hero)
+    base:OnHeroExit(player)
+	print("OnHeroExit ".."GameModePVPHandler_CRDota")
+end
+
 GameModePVPHandler_CRDota.EndGame = EndGame
 GameModePVPHandler_CRDota.InitGameMode = InitGameMode
 GameModePVPHandler_CRDota.OnThink = OnThink
 
 --event
-GameModePVPHandler_CRDota.OnPlayerConnectFull = OnPlayerConnectFull
-GameModePVPHandler_CRDota.OnPlayerConnect = OnPlayerConnect
-GameModePVPHandler_CRDota.OnPlayerDisconnect = OnPlayerDisconnect
-GameModePVPHandler_CRDota.OnPlayerReconnected = OnPlayerReconnected
-GameModePVPHandler_CRDota.OnPlayerChat = OnPlayerChat
-GameModePVPHandler_CRDota.OnPlayerPickHero = OnPlayerPickHero
 GameModePVPHandler_CRDota.OnEntityKilled = OnEntityKilled
 GameModePVPHandler_CRDota.OnPlayerGainedLevel = OnPlayerGainedLevel
 
 GameModePVPHandler_CRDota.OnDamageFilter = OnDamageFilter
 GameModePVPHandler_CRDota.OnHealingFilter = OnHealingFilter
 GameModePVPHandler_CRDota.ExecuteOrderFilter = ExecuteOrderFilter
+
+GameModePVPHandler_CRDota.OnPlayerEnter = OnPlayerEnter
+GameModePVPHandler_CRDota.OnPlayerExit = OnPlayerExit
+GameModePVPHandler_CRDota.OnHeroEnter = OnHeroEnter
+GameModePVPHandler_CRDota.OnHeroExit = OnHeroExit
 
 return GameModePVPHandler_CRDota
