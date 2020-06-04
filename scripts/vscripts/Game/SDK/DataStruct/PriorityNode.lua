@@ -1,8 +1,11 @@
 local PriorityNode = BaseClass("PriorityNode")
 
+local function PriorityNodeCtor(self)
+    self.Name = ""
+    self.Weight = 0
+    self.Value = nil
+end
 
-PriorityNode.Name = ""
-PriorityNode.Weight = 0
-PriorityNode.Value = nil
+PriorityNode.__init = PriorityNodeCtor
 
 return PriorityNode

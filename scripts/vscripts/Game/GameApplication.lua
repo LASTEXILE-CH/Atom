@@ -22,6 +22,19 @@ local function Start(self)
     ListenToGameEvent("player_reconnected", Dynamic_Wrap(GameApplication, "OnPlayerReconnected"), self)
     ListenToGameEvent("player_chat",Dynamic_Wrap(GameApplication,"OnPlayerChat"),self)
     ListenToGameEvent("dota_player_pick_hero",Dynamic_Wrap(GameApplication,"OnPlayerPickHero"),self)
+
+    self._node = LodTickNode.New()
+    self._node:SetSpan(1.0)
+    self._node:Attach(function ()
+        --print("AAAAAAAAAAAAAAA")
+    end)
+    self._node.Name = "AAA"
+    self._node1 = LodTickNode.New()
+    self._node1:SetSpan(1.0)
+    self._node1:Attach(function ()
+        print("BBBBBBBBBBBBBB")
+    end)
+    self._node1.Name = "BBB"
 end
 
 local function InitGameMode()
@@ -32,6 +45,7 @@ end
 --变为Local的话 dota2的事件会监听不到，有可能dota2是全局_G上去找这个函数的，而不是当前_Env上去找
 function OnThink()
     GameRules.GameMode:OnThink()
+    LodTickNode.Update(0.5)
 	return 1
 end
 

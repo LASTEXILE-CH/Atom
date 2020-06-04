@@ -40,6 +40,10 @@ _G.RefList1 = require("/Game/SDK/DataStruct/RefList/RefList1")
 _G.RefListNode2 = require("Game/SDK/DataStruct/RefList/RefListNode2")
 _G.RefList2 = require("Game/SDK/DataStruct/RefList/RefList2")
 
+
+--Timer
+_G.LodTickNode = require("Game/SDK/Time/LodTickNode")
+
 --Entity
 _G.Entity = require("Game/Entity/Entity")
 _G.Hero = require("Game/Entity/Hero")

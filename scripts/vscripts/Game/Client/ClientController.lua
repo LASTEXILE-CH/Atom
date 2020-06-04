@@ -1,7 +1,7 @@
 local ClientController = BaseClass("ClientController")
 
 local function ClientControllerCtor(self)
-    
+    self.Player = nil
 end
 
 local function End(self)
@@ -79,8 +79,6 @@ local function OnPlayerPickHero(self, eventInfo)
         end
     end
 end
-
-ClientController.Player = nil
 
 ClientController.__init = ClientControllerCtor
 ClientController.End = End

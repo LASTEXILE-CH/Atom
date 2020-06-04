@@ -118,10 +118,6 @@ local function CopyTo(self, list)
     end
 end
 
-PriorityValue.DeleUpdated = nil
-PriorityValue._value = nil
-PriorityValue._defaultValue = nil
-
 PriorityValue.__init = PriorityValueCtor
 
 PriorityValue.GetValue = GetValue

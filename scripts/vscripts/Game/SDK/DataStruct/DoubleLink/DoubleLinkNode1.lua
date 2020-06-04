@@ -1,5 +1,10 @@
 local DoubleLinkNode1 = BaseClass("DoubleLinkNode1")
 
+local function DoubleLinkNode1Ctor(self)
+    self._pre = nil
+    self._next = nil
+end
+
 local function IsAttach(self)
     return self._pre ~= nil
 end
@@ -16,6 +21,7 @@ end
 DoubleLinkNode1._pre = nil
 DoubleLinkNode1._next = nil
 
+DoubleLinkNode1.__init = DoubleLinkNode1Ctor
 DoubleLinkNode1.IsAttach = IsAttach
 DoubleLinkNode1.Detach = Detach
 

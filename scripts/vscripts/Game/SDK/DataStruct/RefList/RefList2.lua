@@ -202,8 +202,6 @@ local function _Link(pre, next)
     next._pre = pre
 end
 
-RefList2._root = nil
-
 --static function
 RefList2.StaticNext = StaticNext
 RefList2._PushAfter = _PushAfter
@@ -235,7 +233,5 @@ RefList2.PushBeforeList = PushBeforeList
 RefList2.Clear = Clear
 RefList2._Detach = _Detach
 RefList2._Link = _Link
-
-RefList2._cnt = 0
 
 return RefList2

@@ -1,7 +1,9 @@
 local DoubleLinkNode2 = BaseClass("DoubleLinkNode2")
 
 local function DoubleLinkNode2Ctor(self, data)
-    self.Data = data
+    self._pre = nil
+    self._next = nil
+    self.Data = nil
 end
 
 local function IsAttach(self)
@@ -18,9 +20,6 @@ local function Detach(self)
 end
 
 DoubleLinkNode2.__init = DoubleLinkNode2Ctor
-DoubleLinkNode2._pre = nil
-DoubleLinkNode2._next = nil
-DoubleLinkNode2.Data = nil
 
 DoubleLinkNode2.IsAttach = IsAttach
 DoubleLinkNode2.Detach = Detach

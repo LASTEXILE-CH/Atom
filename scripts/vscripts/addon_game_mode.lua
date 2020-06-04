@@ -6,6 +6,6 @@ function Precache(context)
 end
 
 function Activate()
-	  GameApplication:GetInstance():Start()
+	GameApplication:GetInstance():Start()
     GameApplication:GetInstance():InitGameMode()
 end

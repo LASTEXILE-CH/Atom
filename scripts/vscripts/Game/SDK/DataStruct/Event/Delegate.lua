@@ -5,10 +5,12 @@ local function DelegateCotr(self)
 end
 
 local function Add(self, action)
+    print("Add"..tostring(action))
     self.Callbacks[tostring(action)] = action
 end
 
 local function Delete(self, action) 
+    print("Delete"..tostring(action))
     self.Callbacks[tostring(action)] = nil
 end
 

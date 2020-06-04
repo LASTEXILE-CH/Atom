@@ -1,7 +1,10 @@
 local RefListNode2 = BaseClass("RefListNode2")
 
 local function RefListNode2Ctor(self, data)
-    self.Data = data
+    self._pre = nil
+    self._next = nil
+    self._list = nil
+    self.Data = nil
 end
 
 local function IsAttach(self)
@@ -20,10 +23,6 @@ local function Detach(self)
 end
 
 RefListNode2.__init = RefListNode2Ctor
-RefListNode2._pre = nil
-RefListNode2._next = nil
-RefListNode2._list = nil
-RefListNode2.Data = nil
 
 RefListNode2.IsAttach = IsAttach
 RefListNode2.IsAttachList = IsAttachList
