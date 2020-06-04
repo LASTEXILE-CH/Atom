@@ -26,7 +26,7 @@ end
 
 local function InitGameMode()
     GameRules.GameMode = GameModePVP.New()
-    GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)
+    GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 0.033)
 end
 
 --变为Local的话 dota2的事件会监听不到，有可能dota2是全局_G上去找这个函数的，而不是当前_Env上去找

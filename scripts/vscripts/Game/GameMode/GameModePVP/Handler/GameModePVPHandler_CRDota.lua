@@ -31,6 +31,7 @@ local function InitGameMode(self)
     --GameRules:SetHideKillMessageHeaders(true)
     --GameRules:SetUseUniversalShopMode(true)
     
+    GameRules:GetGameModeEntity():SetCustomGameForceHero( "npc_dota_hero_wisp" )
     GameRules:GetGameModeEntity():SetPauseEnabled(false)
     GameRules:GetGameModeEntity():SetFogOfWarDisabled(true)
     GameRules:GetGameModeEntity():SetUnseenFogOfWarEnabled(true)

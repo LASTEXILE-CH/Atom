@@ -1,42 +1,49 @@
 local ClientController = BaseClass("ClientController")
 
-local function Init(self)
-    self.Account = nil
+local function ClientControllerCtor(self)
+    
 end
 
 local function End(self)
     print("ClientController:End")
 end
 
-local function OnConnect(self, property)
+local function OnConnect(self, playerProperty)
     print("ClientController:OnConnect")
-    local account = Account.New()
-    if account ~= nil then
-        print("ClientController:CreateAccount")
-        local playerID = property.PlayerID
-        account.SteamID = PlayerResource:GetSteamID(playerID)
-        account.SteamAccountID = PlayerResource:GetSteamAccountID(playerID)
-        account.SteamName = PlayerResource:GetPlayerName(playerID)
-        account:CreatePlayer(property)
-        self.Account = account
+    local player = Player.New()
+    if player ~= nil then
+        local playerID = playerProperty.PlayerID
+        player.SteamID = PlayerResource:GetSteamID(playerID)
+        player.SteamAccountID = PlayerResource:GetSteamAccountID(playerID)
+        player.SteamName = PlayerResource:GetPlayerName(playerID)
+        player.ID = playerID
+        player.Index = playerProperty.index
+        player.Splitscreenplayer = playerProperty.splitscreenplayer
+        player.UserID = playerProperty.userid
+        self:StartPlayer(player)
     end
 end
 
---- GetAccount 获得Steam账号
-local function GetAccount(self)
-     return self.Account
+local function StartPlayer(self, player)
+    print("ClientController:CreatePlayer")
+    player:OnClientStart(self)
+    self.Player = player
+end
+
+local function GetPlayer(self)
+     return self.Player
 end
 
 local function OnDisconnect(self)
     print("ClientController:OnDisconnect")
-    if self.Account ~= nil then
-
+    if self.Player ~= nil then
+        
     end
 end
 
 local function OnReconnected(self)
     print("ClientController:OnReconnected")
-    if self.Account ~= nil then
+    if self.Player ~= nil then
 
     end
 end
@@ -65,21 +72,24 @@ end
 --hero ( string )
 local function OnPlayerPickHero(self, eventInfo)
     print("ClientController:OnPlayerPickHero")
-    if self.Account ~= nil then
-        local player = self.Account:GetPlayer()
+    local player = self.Player
+    if player ~= nil then
         if player ~= nil then
             player:OnEnterGameMode(GameRules.GameMode)
         end
     end
 end
 
-ClientController.__init = Init
+ClientController.Player = nil
+
+ClientController.__init = ClientControllerCtor
 ClientController.End = End
 ClientController.OnConnect = OnConnect
 ClientController.OnDisconnect = OnDisconnect
 ClientController.OnReconnected = OnReconnected
 ClientController.OnReveive = OnReveive
-ClientController.GetAccount = GetAccount
+ClientController.GetPlayer = GetPlayer
+ClientController.StartPlayer = StartPlayer
 
 ClientController.OnPlayerChat = OnPlayerChat
 ClientController.OnPlayerPickHero = OnPlayerPickHero
