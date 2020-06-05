@@ -8,4 +8,5 @@ end
 function Activate()
 	GameApplication:GetInstance():Start()
     GameApplication:GetInstance():InitGameMode()
+    print(tostring(string.find("scaleStr", ".")))
 end
