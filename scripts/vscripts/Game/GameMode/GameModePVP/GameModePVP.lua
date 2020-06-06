@@ -20,11 +20,11 @@ local function OnThink(self, deltaTime)
 end
 
 local function EndGame(self)
-    base:EndGame()
     print("EndGame ".."GameModePVP")
     if self.Handler ~= nil then
         self.Handler:EndGame()
     end
+    base:EndGame()
 end
 
 local function OnPlayerEnter(self, player)

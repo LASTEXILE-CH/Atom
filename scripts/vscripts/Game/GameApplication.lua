@@ -34,7 +34,7 @@ function OnThink()
     local deltaTime = GameApplication.DeltaTime
     GameRules.GameMode:OnThink(deltaTime)
     ViLodTickNode.Update(deltaTime)
-    ViTickNode:Update(deltaTime)
+    ViTickNode.Update(deltaTime)
 	return deltaTime
 end
 
@@ -44,9 +44,9 @@ local function End(self)
 end
 
 --userid 每次断线重连 都会自增, Name和PlayerID和index是唯一的
-local clientData = {}
 local function OnPlayerConnectFull(self, eventInfo)
     print("OnPlayerConnectFull")
+    local clientData = {}
     clientData.RpcMessageType = RPCMessage.PLAYER_CONNECT_FULL
     eventInfo.GobalID = eventInfo.PlayerID
     clientData.eventInfo = eventInfo
@@ -54,11 +54,12 @@ local function OnPlayerConnectFull(self, eventInfo)
 end
 
 local function OnPlayerConnect(self, eventInfo)
-    -- print("OnPlayerConnect")
+    print("OnPlayerConnect")
     -- for key, value in pairs(eventInfo) do
     --     print(key)
     --     print(value)
     -- end
+    local clientData = {}
     clientData.RpcMessageType = RPCMessage.PLAYER_CONNECT
     eventInfo.GobalID = eventInfo.userid
     clientData.eventInfo = eventInfo
@@ -71,6 +72,7 @@ local function OnPlayerDisconnect(self, eventInfo)
     --     print(key)
     --     print(value)
     -- end
+    local clientData = {}
     clientData.RpcMessageType = RPCMessage.PLAYER_DISCONNECT
     eventInfo.GobalID = eventInfo.PlayerID
     clientData.eventInfo = eventInfo
@@ -83,6 +85,7 @@ local function OnPlayerReconnected(self, eventInfo)
     --     print(key)
     --     print(value)
     -- end
+    local clientData = {}
     clientData.RpcMessageType = RPCMessage.PLAYER_RECONNECTED
     eventInfo.GobalID = eventInfo.PlayerID
     clientData.eventInfo = eventInfo
@@ -95,6 +98,7 @@ local function OnPlayerChat(self, eventInfo)
     --     print(key)
     --     print(value)
     -- end
+    local clientData = {}
     clientData.RpcMessageType = RPCMessage.ENTITY_MESSAGE
     clientData.EntityMessage = RPCEntityMessage.PLAYER_CHAT
     eventInfo.GobalID = eventInfo.playerid
@@ -108,6 +112,7 @@ local function OnPlayerPickHero(self, eventInfo)
     --     print(key)
     --     print(value)
     -- end
+    local clientData = {}
     clientData.RpcMessageType = RPCMessage.ENTITY_MESSAGE
     clientData.EntityMessage = RPCEntityMessage.PLAYER_PICKHERO
     eventInfo.GobalID = eventInfo.player - 1 --https://guild.gamer.com.tw/wiki.php?sn=10935&n=%E8%AB%87%E8%A9%B1%E7%AA%97

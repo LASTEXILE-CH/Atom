@@ -68,7 +68,7 @@ local function Add(self, node)
             slot = slot - _timeListArray.Count()
         end
     end
-    _timeListArray.Get(slot).PushBackNode(node.AttachNode)
+    _timeListArray:Get(slot).PushBackNode(node.AttachNode)
 end
 
 local function Next(self)
@@ -84,7 +84,7 @@ end
 local function Clear(self)
     local count = self._timeListArray:Count()
     for iter = 0, iter < count do
-        self._timeListArray.Get(iter):Clear()
+        self._timeListArray:Get(iter):Clear()
     end
     self._timeListArray:Clear()
     self._timeInf = 0

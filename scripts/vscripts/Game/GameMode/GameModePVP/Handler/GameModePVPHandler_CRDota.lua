@@ -9,7 +9,7 @@ local function InitGameMode(self)
     GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_CUSTOM_1, 1)
     GameRules:SetCustomGameTeamMaxPlayers(DOTA_TEAM_CUSTOM_2, 1)
     SetTeamCustomHealthbarColor(DOTA_TEAM_CUSTOM_1, 128,255,128)
-    SetTeamCustomHealthbarColor(DOTA_TEAM_CUSTOM_2, 128,255,128)
+    SetTeamCustomHealthbarColor(DOTA_TEAM_CUSTOM_2, 255,128,128)
     
     
     ListenToGameEvent("entity_killed", Dynamic_Wrap(GameModePVPHandler_CRDota, "OnEntityKilled"), self)
@@ -76,12 +76,6 @@ local function InitGameMode(self)
 	-- 		[15] = 448,--+88
 	-- 		[16] = 536,
     -- 	}
-    
-    --Custom Data
-    --GameRules:GetGameModeEntity().PlayerIDToSteamID = {}
-    --GameRules:GetGameModeEntity().SteamID2PlayerID = {}
-    --GameRules:GetGameModeEntity().Steamid2Name = {}
-    --GameRules:GetGameModeEntity().UserIDToPlayer = {}
 end
 
 local function OnThink(self, deltaTime)
