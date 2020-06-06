@@ -155,6 +155,12 @@ local function _Link(pre, next)
     next._pre = pre
 end
 
+local function PushBackEx(self, node, data) 
+    node:Detach()
+    node.Data = data
+    ViDoubleLink2._PushBeforeNode(self._root, node)
+end
+
 ViDoubleLink2.__init = ViDoubleLink2Ctor
 
 ViDoubleLink2._Init = _Init
@@ -180,5 +186,7 @@ ViDoubleLink2._PushBeforeNode = _PushBeforeNode
 ViDoubleLink2._PushAfterList = _PushAfterList
 ViDoubleLink2._PushBeforeList = _PushBeforeList
 ViDoubleLink2._Link = _Link
+
+ViDoubleLink2.PushBackEx = PushBackEx
 
 return ViDoubleLink2

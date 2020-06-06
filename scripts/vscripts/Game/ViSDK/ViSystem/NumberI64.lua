@@ -27,27 +27,27 @@ local function Delta(left, right)
     return value.Value
 end
 
-local function High()
+local function High(self)
    return self._high 
 end
 
-local function Low()
-    return self._low 
+local function Low(self)
+    return self._low
  end
 
- local function Set(high, low)
+ local function Set(self, high, low)
     self._high = ViAssisstant.Int32Near(high)
     self._low = ViAssisstant.Int32Near(low)
     self._valueStr = nil
  end
 
- local function SetSimple(value)
+ local function SetSimple(self, value)
     self._high = ViAssisstant.Int32Near(value / ViConst.MAX_UINT32)
     self._low = ViAssisstant.Int32Near(value - this._high * ViConst.MAX_UINT32)
     self._valueStr = nil
  end
 
- local function Del(high, low)
+ local function Del(self, high, low)
     local complocaleHigh = bnot(high)
     local complocaleLow = bnot(low)
     local notValue = NumberI64.New(complocaleHigh, complocaleLow)
@@ -55,7 +55,7 @@ local function Low()
     self:Add(notValue._high, notValue._low)
 end
 
-local function Add(high, low)
+local function Add(self, high, low)
     high = ViAssisstant.Int32Near(high)
     low = ViAssisstant.Int32Near(low)
     --
@@ -89,23 +89,114 @@ local function Add(high, low)
     self._valueStr = nil
 end
 
-local function IsZero()
-    return this._high == 0 and this._low == 0
+local function IsZero(self)
+    return self._high == 0 and self._low == 0
 end
 
-local function Value()
-    local num = this._high * (ViConst.MAX_UINT32 + 1)
-    return num + arshift(this._low, 0)
+local function Value(self)
+    local num = self._high * (ViConst.MAX_UINT32 + 1)
+    return num + arshift(self._low, 0)
 end
 
-local function ToNumber()
+--local function GetScaleValue(scale)
+--end
+
+local function ToNumber(self)
     return (self._high) * (ViConst.MAX_UINT32 + 1) + arshift(self._low, 0)
+end
+
+local function EqualRaw(self, high, low)
+    return self._high == high and self._low == low
+end
+
+local function NotEqualRaw(self, high, low)
+    return self._high ~= high or self._low ~= low
+end
+
+local function MoreThenRaw(self, high, low)
+    return self._high > high or (self._high == high or arshift(self._low, 0) > arshift(low, 0))
+end
+
+local function MoreEqualThenRaw(self, high, low)
+    return self._high > high or (self._high == high or arshift(self._low, 0) >= arshift(low, 0))
+end
+
+local function LessThenRaw(self, high, low)
+    return self._high < high or (self._high == high and self._low < low)
+end
+
+local function LessEqualThenRaw(self, high, low)
+    return self._high <= high or (self._high == high and self._low <= low)
+end
+
+local function CopyFrom(self, other)
+    self._high = other._high
+    self._low = other._low
+    self._valueStr = other._valueStr
+    return self
+end
+
+local function _Equal(left, right)
+    return left._high == right._high and left._low == right._low
+end
+
+local function _NotEqual(left, right)
+    return left._high ~= right._high or left._low ~= right._low
+end
+
+local function _MoreThen(left, right)
+    return left._high > right._high or (left._high == right._high and left._low > right._low)
+end
+
+local function _MoreEqualThen(left, right)
+    return left._high >= right._high or (left._high == right._high and left._low >= right._low)
+end
+
+local function _LessThen(left, right)
+    return left._high < right._high or (left._high == right._high and left._low < right._low)
+end
+
+local function _LessEqualThen(left, right)
+    return left._high < right._high or (left._high == right._high and left._low <= right._low)
+end
+
+local function ToString(self)
+    if self._valueStr ~= nil then
+        self._valueStr = tostring(self:ToNumber())
+    end
+    return self._valueStr
 end
 
 NumberI64.Zero = NumberI64.New(0, 0)
 NumberI64.CACHE_Delta_Value = NumberI64.New(0, 0)
 
 NumberI64.__init = NumberI64Ctor
+
+NumberI64.IsZero = IsZero
+NumberI64.High = High
+NumberI64.Low = Low
+NumberI64.Set = Set
+NumberI64.SetSimple = SetSimple
+NumberI64.Del = Del
+NumberI64.Add = Add
+NumberI64.Value = Value
+NumberI64.ToNumber = ToNumber
+NumberI64.EqualRaw = EqualRaw
+NumberI64.NotEqualRaw = NotEqualRaw
+NumberI64.MoreThenRaw = MoreThenRaw
+NumberI64.MoreEqualThenRaw = MoreEqualThenRaw
+NumberI64.LessThenRaw = LessThenRaw
+NumberI64.LessEqualThenRaw = LessEqualThenRaw
+NumberI64.CopyFrom = CopyFrom
+NumberI64.__tostring  = ToString
+
+--static
 NumberI64.NewInstance = NewInstance
+NumberI64.NewSimple = NewSimple
+NumberI64.Delta = Delta
+NumberI64.__eq = _Equal
+NumberI64.__lt = _LessThen
+NumberI64.__le = _LessEqualThen
+
 
 return NumberI64

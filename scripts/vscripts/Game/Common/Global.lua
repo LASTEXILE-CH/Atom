@@ -25,6 +25,7 @@ _G.tohex = bit.tohex
 _G.ViConst = require("Game/ViSDK/ViSystem/ViConst")
 _G.ViAssisstant = require("Game/ViSDK/ViSystem/ViAssisstant")
 _G.ViProfiler = require("Game/ViSDK/ViSystem/ViProfiler")
+_G.NumberI64 = require("Game/ViSDK/ViSystem/NumberI64")
 
 _G.Singleton = require("Game/ViSDK/Singleton")
 
@@ -80,6 +81,35 @@ _G.ViRefList2 = require("Game/ViSDK/ViDataStruct/ViRefList/ViRefList2")
 --ViTimer
 _G.ViLodTickNode = require("Game/ViSDK/ViTime/ViLodTickNode")
 _G.ViTickNode = require("Game/ViSDK/ViTime/ViTickNode")
+_G.ViTimeNodeInterface = require("Game/ViSDK/ViTime/ViTimeNodeInterface")
+_G.ViTimer = require("Game/ViSDK/ViTime/ViTimer")
+_G.TimeRoll = require("Game/ViSDK/ViTime/TimeRoll")
+_G.ViTimeNode1 = require("Game/ViSDK/ViTime/ViTimeNode1")
+_G.ViTimeNode4 = require("Game/ViSDK/ViTime/ViTimeNode4")
+_G.ViRealTimerInstance = require("Game/ViSDK/ViTime/ViRealTimerInstance")
+_G.ViTimerInstance = require("Game/ViSDK/ViTime/ViTimerInstance")
+
+--Event
+_G.ViAsynDelegateInterface = require("Game/ViSDK/ViEvent/ViCallback")
+
+_G.ViCallback0 = require("Game/ViSDK/ViEvent/ViCallback0/ViCallback0")
+_G.ViAsynCallback0 = require("Game/ViSDK/ViEvent/ViCallback0/ViAsynCallback0")
+_G.ViEvent0AsynList = require("Game/ViSDK/ViEvent/ViCallback0/ViEvent0AsynList")
+_G.ViEvent0List = require("Game/ViSDK/ViEvent/ViCallback0/ViEvent0List")
+
+_G.ViCallback1 = require("Game/ViSDK/ViEvent/ViCallback1/ViCallback1")
+_G.ViAsynCallback1 = require("Game/ViSDK/ViEvent/ViCallback1/ViAsynCallback1")
+_G.ViEvent1AsynList = require("Game/ViSDK/ViEvent/ViCallback1/ViEvent1AsynList")
+_G.ViEvent1List = require("Game/ViSDK/ViEvent/ViCallback1/ViEvent1List")
+
+_G.ViCallback2 = require("Game/ViSDK/ViEvent/ViCallback2/ViCallback2")
+_G.ViAsynCallback2 = require("Game/ViSDK/ViEvent/ViCallback2/ViAsynCallback2")
+_G.ViEvent2AsynList = require("Game/ViSDK/ViEvent/ViCallback2/ViEvent2AsynList")
+_G.ViEvent2List = require("Game/ViSDK/ViEvent/ViCallback2/ViEvent2List")
+
+_G.ViWorkFlowEvent = require("Game/ViSDK/ViDataStruct/ViWorkFlowEvent")
+_G.ViWorkFlowEventNode = require("Game/ViSDK/ViDataStruct/ViWorkFlowEventNode")
+_G.ViActiveValue = require("Game/ViSDK/ViDataStruct/ViActiveValue")
 
 --Entity
 _G.Entity = require("Game/Entity/Entity")
