@@ -30,7 +30,7 @@ local function Invoke(self, clear, eventId)
                 local iterCallback = iterNode.Data
                 iterCallback:Exec(eventId)
             end
-        _eventList:PushBackList(self.CACHE_Invoke_ExecList);
+        _eventList:PushBackList(self.CACHE_Invoke_ExecList)
     end
 end
 

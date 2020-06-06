@@ -30,7 +30,7 @@ local function Invoke(self, clear, eventId, param0)
                 local iterCallback = iterNode.Data
                 iterCallback:Exec(eventId, param0)
             end
-        _eventList:PushBackList(self.CACHE_Invoke_ExecList);
+        _eventList:PushBackList(self.CACHE_Invoke_ExecList)
     end
 end
 
@@ -44,7 +44,7 @@ local function AttachAsynEx(self, node, func, timeSpan)
 end
 
 local function Clear()
-    local _eventList = self._eventList;
+    local _eventList = self._eventList
     while _eventList:IsNotEmpty() do
         local iterNode = _eventList:GetHead()
         local iterCallback = iterNode.Data

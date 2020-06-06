@@ -45,7 +45,7 @@ end
 local function _AsynExec(self)
     local func = self._funcAsyn
     self._funcAsyn = nil
-    ViDelegateAssisstant.Invoke1(func, self._eventID);
+    ViDelegateAssisstant.Invoke1(func, self._eventID)
 end
 
 local function Attach(self, func, list)
