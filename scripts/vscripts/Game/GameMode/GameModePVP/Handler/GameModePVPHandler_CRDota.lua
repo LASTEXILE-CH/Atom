@@ -84,10 +84,10 @@ local function InitGameMode(self)
     --GameRules:GetGameModeEntity().UserIDToPlayer = {}
 end
 
-local function OnThink(self)
-    base:OnThink()
+local function OnThink(self, deltaTime)
+    base:OnThink(deltaTime)
     --print("OnThink ".."GameModePVPHandler_CRDota")
-    return 1
+    return deltaTime
 end
 
 local function EndGame(self)

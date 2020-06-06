@@ -74,9 +74,7 @@ local function OnPlayerPickHero(self, eventInfo)
     print("ClientController:OnPlayerPickHero")
     local player = self.Player
     if player ~= nil then
-        if player ~= nil then
-            player:OnEnterGameMode(GameRules.GameMode)
-        end
+        player:OnEnterGameMode(GameRules.GameMode)
     end
 end
 

@@ -4,9 +4,9 @@ local function InitGameMode(self)
 	print("InitGameMode ".."BaseGameMode")
 end
 
-local function OnThink(self)
+local function OnThink(self, deltaTime)
 	--print("OnThink ".."BaseGameMode")
-	return 1
+	return deltaTime
 end
 
 local function EndGame(self)

@@ -113,9 +113,10 @@ _G.ViActiveValue = require("Game/ViSDK/ViDataStruct/ViActiveValue")
 
 --Entity
 _G.Entity = require("Game/Entity/Entity")
-_G.Hero = require("Game/Entity/Hero")
-_G.Player = require("Game/Entity/Player")
-_G.HeroController = require("Game/Entity/HeroController")
+_G.Hero = require("Game/Entity/Hero/Hero")
+_G.HeroController = require("Game/Entity/Hero/HeroController")
+_G.Player = require("Game/Entity/Player/Player")
+_G.FakePlayer = require("Game/Entity/Player/FakePlayer")
 
 --PVE
 _G.GameModePVE = require("Game/GameMode/GameModePVE/GameModePVE")

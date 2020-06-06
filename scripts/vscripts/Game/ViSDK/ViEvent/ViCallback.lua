@@ -41,7 +41,7 @@ local function _AttachAsyn(self)
         return
     end
     if self.TimeSpan > 0 then
-        self._execTime = ViRealTimerInstance.Time + this.TimeSpan
+        self._execTime = ViRealTimerInstance.Time + self.TimeSpan
         ViAsynDelegateInterface._timeList:PushBackEx(self._attachNode, self)
     else
         ViAsynDelegateInterface._immediateList:PushBackEx(self._attachNode, self);

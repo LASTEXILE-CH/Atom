@@ -4,9 +4,9 @@ local function InitGameMode(self)
     print("InitGameMode ".."GameModePVEHandler")
 end
 
-local function OnThink(self)
+local function OnThink(self, deltaTime)
     print("OnThink ".."GameModePVEHandler")
-    return 1
+    return deltaTime
 end
 
 local function EndGame(self)

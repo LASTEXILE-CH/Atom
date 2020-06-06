@@ -6,10 +6,10 @@ local function InitGameMode(self)
     print("InitGameMode ".."GameModePVEHandler_Demo")
 end
 
-local function OnThink(self)
-    base:OnThink()
+local function OnThink(self, deltaTime)
+    base:OnThink(deltaTime)
     print("OnThink ".."GameModePVEHandler_Demo")
-    return 1
+    return deltaTime
 end
 
 local function EndGame(self)

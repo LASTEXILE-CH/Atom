@@ -10,18 +10,13 @@ local function InitGameMode(self)
     end
 end
 
-local function OnThink(self)
-    base:OnThink()
+local function OnThink(self, deltaTime)
+    base:OnThink(deltaTime)
     --print("OnThink ".."GameModePVP")
     if self.Handler ~= nil then
-        self.Handler:OnThink()
+        self.Handler:OnThink(deltaTime)
     end
-    if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
-        
-	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
-		return nil
-    end
-    return 1
+    return deltaTime
 end
 
 local function EndGame(self)

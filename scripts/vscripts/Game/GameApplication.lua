@@ -26,15 +26,16 @@ end
 
 local function InitGameMode()
     GameRules.GameMode = GameModePVP.New()
-    GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 0.033)
+    GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 0)
 end
 
 --变为Local的话 dota2的事件会监听不到，有可能dota2是全局_G上去找这个函数的，而不是当前_Env上去找
 function OnThink()
-    GameRules.GameMode:OnThink()
-    ViLodTickNode.Update(0.5)
-    ViTickNode:Update(0.5)
-	return 1
+    local deltaTime = GameApplication.DeltaTime
+    GameRules.GameMode:OnThink(deltaTime)
+    ViLodTickNode.Update(deltaTime)
+    ViTickNode:Update(deltaTime)
+	return deltaTime
 end
 
 local function End(self)
@@ -66,10 +67,10 @@ end
 
 local function OnPlayerDisconnect(self, eventInfo)
     print("OnPlayerDisconnect")
-    for key, value in pairs(eventInfo) do
-        print(key)
-        print(value)
-    end
+    -- for key, value in pairs(eventInfo) do
+    --     print(key)
+    --     print(value)
+    -- end
     clientData.RpcMessageType = RPCMessage.PLAYER_DISCONNECT
     eventInfo.GobalID = eventInfo.PlayerID
     clientData.eventInfo = eventInfo
@@ -78,10 +79,10 @@ end
 
 local function OnPlayerReconnected(self, eventInfo)
     print("OnPlayerReconnected")
-    for key, value in pairs(eventInfo) do
-        print(key)
-        print(value)
-    end
+    -- for key, value in pairs(eventInfo) do
+    --     print(key)
+    --     print(value)
+    -- end
     clientData.RpcMessageType = RPCMessage.PLAYER_RECONNECTED
     eventInfo.GobalID = eventInfo.PlayerID
     clientData.eventInfo = eventInfo
@@ -114,6 +115,7 @@ local function OnPlayerPickHero(self, eventInfo)
     ClientManager:GetInstance():OnReveive(clientData)
 end
 
+GameApplication.DeltaTime = 0.033
 GameApplication.Preload = Preload
 GameApplication.RegisterGameMode = RegisterGameMode
 GameApplication.Start = Start
