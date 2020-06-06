@@ -25,9 +25,9 @@ local function End(self)
 end
 
 local function OnCallerClear(self)
-    self._func = nil;
-    self._funcAsyn = nil;
-    self._node:DetachEx(nil);
+    self._func = nil
+    self._funcAsyn = nil
+    self._node:DetachEx(nil)
 end
 
 local function ForceExec(self)
