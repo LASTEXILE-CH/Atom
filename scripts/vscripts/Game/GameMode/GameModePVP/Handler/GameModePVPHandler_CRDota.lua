@@ -80,12 +80,12 @@ end
 
 local function _OnTick0(self, deltaTime)
     base:_OnTick0(deltaTime)
-    --print("OnThink ".."GameModePVPHandler_CRDota")
+    print("_OnTick0 ".."GameModePVPHandler_CRDota")
 end
 
 local function _OnTick1(self, deltaTime)
     base:_OnTick1(deltaTime)
-    --print("OnThink ".."GameModePVPHandler_CRDota")
+    print("_OnTick1 ".."GameModePVPHandler_CRDota")
 end
 
 local function EndGame(self)

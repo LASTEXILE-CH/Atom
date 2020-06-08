@@ -1,7 +1,8 @@
 local ViTimeNode1 = BaseClass("ViTimeNode1", ViTimeNodeInterface)
 
 local function ViTimeNode1Ctor(self)
-    
+    self._listener = nil
+    self._delegate = nil
 end
 
 local function Delegate(self)

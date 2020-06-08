@@ -15,6 +15,10 @@ end
 local function Start(self)
     --
     self:RegisterGameMode()
+    --
+    local accumulate = NumberI64.New(0, 0) --累计时间
+    local time1970 = NumberI64.New(0, 0)   --1970开始
+    ViTimerInstance.Start(accumulate, time1970, 1, 1000, 1000)
     ViRealTimerInstance.Start(1, 1000, 1000)
     --
     GameRules.GameMode = GameModePVP.New()
@@ -27,6 +31,8 @@ local function Start(self)
     ListenToGameEvent("player_reconnected", Dynamic_Wrap(GameApplication, "OnPlayerReconnected"), self)
     ListenToGameEvent("player_chat",Dynamic_Wrap(GameApplication,"OnPlayerChat"),self)
     ListenToGameEvent("dota_player_pick_hero",Dynamic_Wrap(GameApplication,"OnPlayerPickHero"),self)
+    --
+    self:OnGameStart()
 end
 
 local function Update(self, deltaTime)
@@ -47,7 +53,7 @@ local function End(self)
 end
 
 local function OnGameStart(self)
-    ViTimerInstance.Start(NumberI64.New(0, 0), NumberI64.New(0, 0), 1, 1000, 1000)
+    
 end
 
 --userid 每次断线重连 都会自增, Name和PlayerID和index是唯一的

@@ -10,21 +10,19 @@ local function InitGameMode(self)
 	self.LastTick0Time = GameRules:GetDOTATime(false, true)
 	self.LastTick1Time = GameRules:GetDOTATime(false, true)
 
-	self.Tick0Node = ViTimeNode1.New()
-	local dele0 = ViDelegate1.New()
-	dele0:SetDele(self.OnTick0)
+	self.Tick0Node = ViTimeNode4.New()
+	self.Tick0Node:Start(ViTimerInstance.Timer(), BaseGameMode.TICK0_TIME, self, self.OnTick0)
 	--
-	self.Tick1Node = ViTimeNode1.New()
-	local dele1 = ViDelegate1.New()
-	dele0:SetDele(self.OnTick1)
+	self.Tick1Node = ViTimeNode4.New()
+	self.Tick1Node:Start(ViTimerInstance.Timer(), BaseGameMode.TICK1_TIME, self, self.OnTick1)
 end
 
 local function OnTick0(self)
-	
+	self:_OnTick0()
 end
 
 local function OnTick1(self)
-	
+	self:_OnTick1()
 end
 
 local function _OnTick0(self)
@@ -51,10 +49,12 @@ end
 
 local function OnHeroEnter(self, hero)
 	print("OnHeroEnter ".."BaseGameMode")
+	hero:GetRefController():Attach(GameKeyWord.GameSpace, self.HeroList)
 end
 
 local function OnHeroExit(self, hero)
 	print("OnHeroExit ".."BaseGameMode")
+	hero:GetRefController():Detach(GameKeyWord.GameSpace)
 end
 
 BaseGameMode.__init = InitGameMode
