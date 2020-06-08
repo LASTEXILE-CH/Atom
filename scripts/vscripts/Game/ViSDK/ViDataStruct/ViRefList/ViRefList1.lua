@@ -7,8 +7,8 @@ end
 
 local function ViRefList1Ctor(self)
     self._next = nil
-    self._cnt = 0
-    self._root = RefListNode1.New()
+    self._cnt = 1
+    self._root = ViRefListNode1.New()
     self._root._list = self
     self:_Init()
 end
@@ -17,7 +17,7 @@ end
 local function _Init(self)
     ViRefList1._Link(self._root, self._root)
     self._next = self._root
-    self._cnt = 0
+    self._cnt = 1
 end
 
 local function IsEmpty(self)

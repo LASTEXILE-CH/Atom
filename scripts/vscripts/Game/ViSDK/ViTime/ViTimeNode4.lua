@@ -12,7 +12,8 @@ local function Span()
     return self._span
 end
 
-local function Start(timer, span, callback)
+local function Start(timer, span, listener, callback)
+    self._listener = listener
     self._delegate = callback
     self._span = span
     self:SetTime(timer.Time + ViAssisstant.Int32Near(self._span * 100))
@@ -20,7 +21,7 @@ local function Start(timer, span, callback)
 end
 
 local function Detach(self)
-    self._delegate:Clear()
+    self._listener = nil
     self._delegate = nil
     self._span = 0
     self.AttachNode:Detach()
@@ -29,7 +30,7 @@ end
 local function _Exce(self, timer)
     self:SetTime(timer.Time + ViAssisstant.Int32Near(self._span * 100))
     timer:Add(self)
-    ViDelegateAssisstant.Invoke1(self._delegate, self)
+    ViDelegateAssisstant.Invoke1( self._listener, self._delegate, self)
 end
 
 ViTimeNode4.__init = ViTimeNode4Ctor

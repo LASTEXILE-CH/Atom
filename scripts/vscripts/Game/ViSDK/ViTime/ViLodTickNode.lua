@@ -36,8 +36,8 @@ local function ClearAccumulateTime(self)
     self._accumulateTime = 0.0
 end
 
-local function Attach(self, callback)
-    self._delegate:SetDele(callback)
+local function Attach(self, listener, callback)
+    self._delegate:SetDele(listener, callback)
     self._node.Data = self
     ViLodTickNode._tickList:PushBackNode(self._node)
 end
@@ -61,7 +61,7 @@ local function Exec(self, deltaTime)
     self._accumulateTime = self._accumulateTime + deltaTime
     if  self._accumulateTime >= self._span then
         self._accumulateTime = self._accumulateTime - self._span
-        ViDelegateAssisstant.Invoke1(self._delegate, self._span)
+        self._delegate:Invoke(self._span)
     end
 end
 

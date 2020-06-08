@@ -3,6 +3,7 @@ local ViCallback0 = BaseClass("ViCallback0")
 local function ViCallback0Ctor(self)
     self._node = ViDoubleLinkNode2.New()
     self._func = nil
+    self._listener = nil
 end
 
 local function IsActive(self)
@@ -11,19 +12,23 @@ end
 
 local function End(self)
     self._func = nil
+    self._listener = nil
     self._node:DetachEx(nil)
 end
 
 local function OnCallerClear(self)
     self._func = nil
+    self._listener = nil
     self._node:DetachEx(nil)
 end
 
 local function Exec(self, eventID)
-    ViDelegateAssisstant.Invoke1(self._func, eventID)
+    ViDelegateAssisstant.Invoke1(self._listener, self._func, eventID)
 end
-local function Attach(self, func, list)
+
+local function Attach(self, listener, func, list)
     self._func = func
+    self._listener = listener
     list:PushBackEx(self._node, self)
 end
 

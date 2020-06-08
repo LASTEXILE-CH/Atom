@@ -4,9 +4,12 @@ local function InitGameMode(self)
     print("InitGameMode ".."GameModePVEHandler")
 end
 
-local function OnThink(self, deltaTime)
-    print("OnThink ".."GameModePVEHandler")
-    return deltaTime
+local function _OnTick0(self, deltaTime)
+    print("OnTick0 ".."GameModePVEHandler")
+end
+
+local function _OnTick1(self, deltaTime)
+    print("OnTick1 ".."GameModePVEHandler")
 end
 
 local function EndGame(self)
@@ -31,7 +34,8 @@ end
 
 GameModePVEHandler.InitGameMode = InitGameMode
 GameModePVEHandler.EndGame = EndGame
-GameModePVEHandler.OnThink = OnThink
+GameModePVEHandler._OnTick0 = _OnTick0
+GameModePVEHandler._OnTick1 = _OnTick1
 
 GameModePVEHandler.OnPlayerEnter = OnPlayerEnter
 GameModePVEHandler.OnPlayerExit = OnPlayerExit

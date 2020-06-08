@@ -18,6 +18,7 @@ local function Start(self)
     ViRealTimerInstance.Start(1, 1000, 1000)
     --
     GameRules.GameMode = GameModePVP.New()
+    --
     ClientManager:GetInstance():Start()
     --Lister Event
     ListenToGameEvent("player_connect_full", Dynamic_Wrap(GameApplication,"OnPlayerConnectFull" ),self)
@@ -26,10 +27,8 @@ local function Start(self)
     ListenToGameEvent("player_reconnected", Dynamic_Wrap(GameApplication, "OnPlayerReconnected"), self)
     ListenToGameEvent("player_chat",Dynamic_Wrap(GameApplication,"OnPlayerChat"),self)
     ListenToGameEvent("dota_player_pick_hero",Dynamic_Wrap(GameApplication,"OnPlayerPickHero"),self)
-    
 end
 
---变为Local的话 dota2的事件会监听不到，有可能dota2是全局_G上去找这个函数的，而不是当前_Env上去找
 local function Update(self, deltaTime)
     --
     ViRealTimerInstance.Update(deltaTime)
@@ -45,6 +44,10 @@ end
 local function End(self)
     GameRules.GameMode:EndGame()
     ClientManager:GetInstance():End()
+end
+
+local function OnGameStart(self)
+    ViTimerInstance.Start(NumberI64.New(0, 0), NumberI64.New(0, 0), 1, 1000, 1000)
 end
 
 --userid 每次断线重连 都会自增, Name和PlayerID和index是唯一的
@@ -129,6 +132,7 @@ GameApplication.RegisterGameMode = RegisterGameMode
 GameApplication.Start = Start
 GameApplication.Update = Update
 GameApplication.End = End
+GameApplication.OnGameStart = OnGameStart
 --Event
 GameApplication.OnPlayerConnectFull = OnPlayerConnectFull
 GameApplication.OnPlayerConnect = OnPlayerConnect

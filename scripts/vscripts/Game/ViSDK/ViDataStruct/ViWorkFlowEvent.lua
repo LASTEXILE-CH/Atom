@@ -3,6 +3,7 @@ local ViWorkFlowEvent = BaseClass("ViWorkFlowEvent")
 local function ViWorkFlowEventCtor(self)
     self._waitList = ViList.New()
     self._callback = nil
+    self._listener = nil
 end
 
 local function Count(self)
@@ -45,7 +46,7 @@ local function EraseWaiting(self, key)
         local iterIndex = ViWorkFlowEvent.TempList:Get(iter)
         local node = self._waitList:Get(iterIndex)
         if node ~= nil then
-            ViDelegateAssisstant.Invoke0(node.Callback)
+            ViDelegateAssisstant.Invoke0(self._listener, node.Callback)
         end
         self._waitList:RemoveAt(iterIndex)
     end
@@ -59,20 +60,22 @@ local function Complete(self, key)
     end
 end
 
-local function Reset(self, callback)
+local function Reset(self, listener, callback)
     self._waitList:Clear()
     self._callback = callback
+    self._listener = listener
 end
 
 local function Clear(self)
     self._waitList:Clear()
     self._callback = nil
+    self._listener = nil
 end
 
 local function Invoke(self)
     local dele = self._callback
     self._callback = nil
-    ViDelegateAssisstant.Invoke0(dele)
+    ViDelegateAssisstant.Invoke0(self._listener, dele)
 end
 
 ViWorkFlowEvent.TempList = ViList.New()

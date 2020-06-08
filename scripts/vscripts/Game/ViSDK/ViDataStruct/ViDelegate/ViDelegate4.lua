@@ -1,21 +1,24 @@
 local ViDelegate4 = BaseClass("ViDelegate4")
 
 local function ViDelegate4Cotr(self)
-    self.Callback = nil
+    self._listener = nil
+    self._callback = nil
 end
 
-local function SetDele(self, action)
-    self.Callback = action
+local function SetDele(self, listener, action)
+    self._listener = listener
+    self._callback = action
 end
 
 local function Invoke(self, param1, param2, param3, param4)
-    if self.Callback ~= nil then
-        self.Callback(param1, param2, param3, param4)
+    if self._listener ~= nil and self._callback ~= nil then
+        self._callback(self._listener, param1, param2, param3, param4)
     end
 end
 
 local function Clear(self) 
-    self.Callback =nil
+    self._listener = nil
+    self._callback = nil
 end
 
 ViDelegate4.__init = ViDelegate4Cotr

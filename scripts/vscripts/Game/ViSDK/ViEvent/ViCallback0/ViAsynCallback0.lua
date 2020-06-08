@@ -3,6 +3,7 @@ local ViAsynCallback0 = BaseClass("ViAsynCallback0", ViAsynDelegateInterface)
 local function ViAsynCallback0Ctor(self)
     self._node = ViDoubleLinkNode2.New()
     self._attachNode = ViDoubleLinkNode2.New()
+    self._listener = nil
     self._func = nil
     self._funcAsyn = nil
     self._eventID = 0
@@ -17,6 +18,7 @@ local function IsAsynActive(self)
 end
 
 local function End(self)
+    self._listener = nil
     self._func = nil
     self._funcAsyn = nil
     self._node:DetachEx(nil)
@@ -24,6 +26,7 @@ local function End(self)
 end
 
 local function OnCallerClear(self)
+    self._listener = nil
     self._func = nil
     self._funcAsyn = nil
     self._node:DetachEx(nil)
@@ -45,11 +48,12 @@ end
 local function _AsynExec(self)
     local func = self._funcAsyn
     self._funcAsyn = nil
-    ViDelegateAssisstant.Invoke1(func, self._eventID)
+    ViDelegateAssisstant.Invoke1(self._listener , func, self._eventID)
 end
 
-local function Attach(self, func, list)
+local function Attach(self, listener, func, list)
     self:End()
+    self._listener = listener
     self._func = func
     list:PushBackEx(self._node, self)
 end

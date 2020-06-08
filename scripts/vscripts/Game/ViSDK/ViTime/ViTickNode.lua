@@ -22,8 +22,8 @@ local function Update(deltaTime)
     tickList:PushBackList(CACHE_UPDATE_ExecList)
 end
 
-local function Attach(self, callback)
-    self._delegate:SetDele(callback)
+local function Attach(self, listener, callback)
+    self._delegate:SetDele(listener, callback)
     self._node.Data = self
     ViTickNode._tickList:PushBackNode(self._node)
 end
@@ -43,7 +43,7 @@ local function Clear()
 end
 
 local function Exec(self, deltaTime)
-    ViDelegateAssisstant.Invoke1(self._delegate, deltaTime)
+    self._delegate:Invoke(deltaTime)
 end
 
 ViTickNode.__init = ViTickNodeCtor

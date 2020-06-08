@@ -73,6 +73,16 @@ local function Remove(self, key)
     end
 end
  
+local function Find(self, key)
+    local count = self:Count()
+    for i=1,count do
+        if self.keyList[i] == key then
+            return key, self[i]
+        end
+    end
+    return key, nil
+end
+
 local function KeyType(self)
     return self.keyType
 end

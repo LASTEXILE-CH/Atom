@@ -78,10 +78,14 @@ local function InitGameMode(self)
     -- 	}
 end
 
-local function OnThink(self, deltaTime)
-    base:OnThink(deltaTime)
+local function _OnTick0(self, deltaTime)
+    base:_OnTick0(deltaTime)
     --print("OnThink ".."GameModePVPHandler_CRDota")
-    return deltaTime
+end
+
+local function _OnTick1(self, deltaTime)
+    base:_OnTick1(deltaTime)
+    --print("OnThink ".."GameModePVPHandler_CRDota")
 end
 
 local function EndGame(self)
@@ -154,7 +158,8 @@ end
 
 GameModePVPHandler_CRDota.EndGame = EndGame
 GameModePVPHandler_CRDota.InitGameMode = InitGameMode
-GameModePVPHandler_CRDota.OnThink = OnThink
+GameModePVPHandler_CRDota._OnTick0 = _OnTick0
+GameModePVPHandler_CRDota._OnTick1 = _OnTick1
 
 --event
 GameModePVPHandler_CRDota.OnEntityKilled = OnEntityKilled

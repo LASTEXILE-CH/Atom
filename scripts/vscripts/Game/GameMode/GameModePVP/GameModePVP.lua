@@ -10,13 +10,18 @@ local function InitGameMode(self)
     end
 end
 
-local function OnThink(self, deltaTime)
-    base:OnThink(deltaTime)
-    --print("OnThink ".."GameModePVP")
+local function _OnTick0(self, deltaTime)
+    base:_OnTick0(deltaTime)
     if self.Handler ~= nil then
-        self.Handler:OnThink(deltaTime)
+        self.Handler:_OnTick0(deltaTime)
     end
-    return deltaTime
+end
+
+local function _OnTick1(self, deltaTime)
+    base:_OnTick1(deltaTime)
+    if self.Handler ~= nil then
+        self.Handler:_OnTick1(deltaTime)
+    end
 end
 
 local function EndGame(self)
@@ -61,7 +66,8 @@ end
 
 GameModePVP.__init = InitGameMode
 GameModePVP.__delete = EndGame
-GameModePVP.OnThink = OnThink
+GameModePVP._OnTick0 = _OnTick0
+GameModePVP._OnTick1 = _OnTick1
 
 GameModePVP.OnPlayerEnter = OnPlayerEnter
 GameModePVP.OnPlayerExit = OnPlayerExit

@@ -6,75 +6,75 @@ local function Clear(delegator)
     end
 end
 
-local function Invoke0(func)
-    if func ~= nil then
-        func:Invoke()
+local function Invoke0(listener, func)
+    if listener ~= nil and func ~= nil then
+        func(listener)
     end
 end
 
-local function InvokeRT0(func)
-    if func ~= nil then
-        return func:Invoke()
+local function InvokeRT0(listener, func)
+    if listener ~= nil and func ~= nil then
+        return func(listener)
     end
 end
 
-local function Invoke1(func, param)
-    if func ~= nil then
-        func:Invoke(param)
+local function Invoke1(listener, func, param)
+    if listener ~= nil and func ~= nil then
+        func(listener, param)
     end
 end
 
-local function InvokeRT1(func, param)
-    if func ~= nil then
-        return func:Invoke(param)
+local function InvokeRT1(listener, func, param)
+    if listener ~= nil and func ~= nil then
+        return func(listener, param)
     end
 end
 
-local function Invoke2(func, param0, param1)
-    if func ~= nil then
-        func:Invoke(param0, param1)
+local function Invoke2(listener, func, param0, param1)
+    if listener ~= nil and func ~= nil then
+        func(listener, param0, param1)
     end
 end
 
-local function InvokeRT2(func, param0, param1)
-    if func ~= nil then
-        return func:Invoke(param0, param1)
+local function InvokeRT2(listener, func, param0, param1)
+    if listener ~= nil and func ~= nil then
+        return func(listener, param0, param1)
     end
 end
 
-local function Invoke3(func, param0, param1, param2)
-    if func ~= nil then
-        func:Invoke(param0, param1)
+local function Invoke3(listener, func, param0, param1, param2)
+    if listener ~= nil and func ~= nil then
+        func(listener, param0, param1)
     end
 end
 
-local function InvokeRT3(func, param0, param1, param2)
-    if func ~= nil then
-        return func:Invoke(param0, param1, param2)
+local function InvokeRT3(listener, func, param0, param1, param2)
+    if listener ~= nil and func ~= nil then
+        return func(listener, param0, param1, param2)
     end
 end
 
-local function Invoke4(func, param0, param1, param2, param3)
-    if func ~= nil then
-        func:Invoke(param0, param1, param2, param3)
+local function Invoke4(listener, func, param0, param1, param2, param3)
+    if listener ~= nil and func ~= nil then
+        func(listener, param0, param1, param2, param3)
     end
 end
 
-local function InvokeRT4(func, param0, param1, param2, param3)
-    if func ~= nil then
-        return func:Invoke(param0, param1, param2, param3)
+local function InvokeRT4(listener, func, param0, param1, param2, param3)
+    if listener ~= nil and func ~= nil then
+        return func(listener, param0, param1, param2, param3)
     end
 end
 
-local function Invoke5(func, param0, param1, param2, param3, param4)
-    if func ~= nil then
-        func:Invoke(param0, param1, param2, param3, param4)
+local function Invoke5(listener, func, param0, param1, param2, param3, param4)
+    if listener ~= nil and func ~= nil then
+        func(listener, param0, param1, param2, param3, param4)
     end
 end
 
-local function InvokeRT5(func, param0, param1, param2, param3, param4)
-    if func ~= nil then
-        return func:Invoke(param0, param1, param2, param3, param4)
+local function InvokeRT5(listener, func, param0, param1, param2, param3, param4)
+    if listener ~= nil and func ~= nil then
+        return func(listener, param0, param1, param2, param3, param4)
     end
 end
 

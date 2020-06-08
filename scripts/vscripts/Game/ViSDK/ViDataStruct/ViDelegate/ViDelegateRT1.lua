@@ -1,26 +1,29 @@
-local ViDelegateRT1 = BaseClass("ViDelegateRT1")
+local ViDelegate1 = BaseClass("ViDelegate1")
 
-local function ViDelegateRT1Cotr(self)
-    self.Callback = nil
+local function ViDelegate1Cotr(self)
+    self._listener = nil
+    self._callback = nil
 end
 
-local function SetDele(self, action)
-    self.Callback = action
+local function SetDele(self, listener, action)
+    self._listener = listener
+    self._callback = action
 end
 
 local function Invoke(self, param)
-    if self.Callback ~= nil then
-        return self.Callback(param)
+    if self._listener ~= nil and self._callback ~= nil then
+        return self._callback(self._listener, param)
     end
 end
 
 local function Clear(self) 
-    self.Callback = nil
+    self._listener = nil
+    self._callback =nil
 end
 
-ViDelegateRT1.__init = ViDelegateRT1Cotr
-ViDelegateRT1.SetDele = SetDele
-ViDelegateRT1.Invoke = Invoke
-ViDelegateRT1.Clear = Clear
+ViDelegate1.__init = ViDelegate1Cotr
+ViDelegate1.SetDele = SetDele
+ViDelegate1.Invoke = Invoke
+ViDelegate1.Clear = Clear
 
-return ViDelegateRT1
+return ViDelegate1

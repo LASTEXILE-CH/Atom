@@ -22,6 +22,8 @@ _G.ror = bit.ror
 _G.tobit = bit.tobit --将某一个位设置为1 bit.bit(position)
 _G.tohex = bit.tohex
 
+_G.GameKeyWord = require("Game/Common/GameKeyWord")
+
 _G.ViConst = require("Game/ViSDK/ViSystem/ViConst")
 _G.ViAssisstant = require("Game/ViSDK/ViSystem/ViAssisstant")
 _G.ViProfiler = require("Game/ViSDK/ViSystem/ViProfiler")
@@ -117,6 +119,7 @@ _G.Hero = require("Game/Entity/Hero/Hero")
 _G.HeroController = require("Game/Entity/Hero/HeroController")
 _G.Player = require("Game/Entity/Player/Player")
 _G.FakePlayer = require("Game/Entity/Player/FakePlayer")
+_G.ViEntityRefController = require("Game/ViSDK/ViEntity/ViEntityRefController")
 
 --PVE
 _G.GameModePVE = require("Game/GameMode/GameModePVE/GameModePVE")

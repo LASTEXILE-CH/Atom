@@ -34,12 +34,12 @@ local function Invoke(self, clear, eventId)
     end
 end
 
-local function AttachAsyn(self, node, func)
-    node:Attach(func, self._eventList)
+local function AttachAsyn(self, node, listener, func)
+    node:Attach(listener, func, self._eventList)
 end
 
-local function AttachAsynEx(self, node, func, timeSpan)
-    node:Attach(func, self._eventList)
+local function AttachAsynEx(self, node, listener, func, timeSpan)
+    node:Attach(listener, func, self._eventList)
     node.TimeSpan = timeSpan
 end
 

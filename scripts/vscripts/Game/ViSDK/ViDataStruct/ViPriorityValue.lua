@@ -65,6 +65,10 @@ local function DelAll(self, name)
     self:Update()
 end
 
+local function SetDele(self, listener, callback)
+    self.DeleUpdated:SetDele(listener, callback)
+end
+
 local function Has(self, name)
     for iter = 1, self._list:Count() do
         local iterNode = self._list:Get(iter)
@@ -99,12 +103,12 @@ local function Update(self)
         end
     end
     if not (oldValue == self._value) then
-        ViDelegateAssisstant.Invoke2(self.DeleUpdated, oldValue, self._value)
+        self.DeleUpdated:Invoke(oldValue, self._value)
     end
 end
 
 local function UpdateNotify(self)
-    ViDelegateAssisstant.Invoke2(self.DeleUpdated, self._value, self._value)
+    self.DeleUpdated:Invoke(self._value, self._value)
 end
 
 local function CopyTo(self, list)
