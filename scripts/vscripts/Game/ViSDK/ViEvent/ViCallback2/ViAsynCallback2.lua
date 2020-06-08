@@ -57,18 +57,18 @@ end
 local function Attach(self, func, list)
     self:End()
     self._func = func
-    self:PushBackEx(self._node, self)
+    list:PushBackEx(self._node, self)
 end
 
-ViAsynCallback0.__init = ViAsynCallback0Ctor
-ViAsynCallback0.IsActive = IsActive
-ViAsynCallback0.End = End
-ViAsynCallback0.OnCallerClear = OnCallerClear
-ViAsynCallback0.Exec = Exec
-ViAsynCallback0.Attach = Attach
+ViAsynCallback2.__init = ViAsynCallback2Ctor
+ViAsynCallback2.IsActive = IsActive
+ViAsynCallback2.End = End
+ViAsynCallback2.OnCallerClear = OnCallerClear
+ViAsynCallback2.Exec = Exec
+ViAsynCallback2.Attach = Attach
 
-ViAsynCallback0.IsAsynActive = IsAsynActive
-ViAsynCallback0.ForceExec = ForceExec
-ViAsynCallback0._AsynExec = _AsynExec
+ViAsynCallback2.IsAsynActive = IsAsynActive
+ViAsynCallback2.ForceExec = ForceExec
+ViAsynCallback2._AsynExec = _AsynExec
 
-return ViAsynCallback0
+return ViAsynCallback2

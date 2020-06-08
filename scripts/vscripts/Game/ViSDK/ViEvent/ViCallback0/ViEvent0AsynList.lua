@@ -44,7 +44,7 @@ local function AttachAsynEx(self, node, func, timeSpan)
 end
 
 local function Clear()
-    local _eventList = self._eventList;
+    local _eventList = self._eventList
     while _eventList:IsNotEmpty() do
         local iterNode = _eventList:GetHead()
         local iterCallback = iterNode.Data

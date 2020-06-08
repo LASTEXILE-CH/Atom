@@ -51,7 +51,7 @@ end
 local function Attach(self, func, list)
     self:End()
     self._func = func
-    self:PushBackEx(self._node, self)
+    list:PushBackEx(self._node, self)
 end
 
 ViAsynCallback0.__init = ViAsynCallback0Ctor

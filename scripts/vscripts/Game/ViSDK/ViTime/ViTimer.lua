@@ -39,24 +39,22 @@ local function Update(self, time)
         return
     end
     local updateTime = self._time
-	local span = self._roll0.Span
+	local span = self._roll0:Span()
 	local topTime = time - span
 	local _roll0 = self._roll0
 	local _roll1 = self._roll1
-	local _roll0_IsRoll = _roll0.IsRoll.bind(_roll0)
-	local _roll0_Next = _roll0.Next.bind(_roll0)
     local _currentList = self._currentList
     while updateTime <= topTime do
         updateTime = updateTime + span
-        if self:_roll0_IsRoll() then
-            ViTimer.Convert2(self._roll1.Current, self._roll0)
-            self._roll1:Next()
+        if _roll0:IsRoll() then
+            ViTimer.Convert2(self._roll1:Current(), self._roll0)
+            _roll1:Next()
             if self._roll1:IsRoll() then
                 ViTimer.Convert(self._reserveList, self._roll1)
             end
         end
         self._time = updateTime
-        _currentList:PushListBack(self._roll0.Current)
+        _currentList:PushBackList(self._roll0:Current())
         _roll0:Next()
         self:_ExecTimeList(_currentList)
     end
@@ -64,10 +62,10 @@ end
 
 local function Add(self, node)
     local _roll0 = self._roll0
-    local node_Time = node.Time
-    if node_Time < _roll0.TimeInf then
-        node:SetTime(_roll0.TimeInf)
-        node_Time = node.Time
+    local node_Time = node:Time()
+    if node_Time < _roll0:TimeInf() then
+        node:SetTime(_roll0:TimeInf())
+        node_Time = node:Time()
     end
     if _roll0:InRange(node_Time) then
         _roll0:Add(node)
@@ -103,7 +101,7 @@ local function Convert2(list, timeRoll)
 end
 
 local function _ExecTimeList(self, list)
-    while list:NotEmpty() do
+    while list:IsNotEmpty() do
         local timeNode = list:GetHead().Data
         timeNode.AttachNode:Detach()
         timeNode:_Exce(self)

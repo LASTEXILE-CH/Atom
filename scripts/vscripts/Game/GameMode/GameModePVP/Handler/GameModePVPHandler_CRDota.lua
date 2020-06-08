@@ -78,6 +78,8 @@ local function InitGameMode(self)
     -- 	}
 end
 
+GameModePVPHandler_CRDota.EventStartCallback = EventStartCallback
+
 local function OnThink(self, deltaTime)
     base:OnThink(deltaTime)
     --print("OnThink ".."GameModePVPHandler_CRDota")

@@ -19,7 +19,7 @@ local function Detach(self)
    end
 end
 
-local function DetachEX(self, data)
+local function DetachEx(self, data)
     if self._pre ~= nil then
      self._pre._next = self._next
      self._next._pre = self._pre
@@ -33,6 +33,6 @@ ViDoubleLinkNode2.__init = ViDoubleLinkNode2Ctor
 
 ViDoubleLinkNode2.IsAttach = IsAttach
 ViDoubleLinkNode2.Detach = Detach
-ViDoubleLinkNode2.DetachEX = DetachEX
+ViDoubleLinkNode2.DetachEx = DetachEx
 
 return ViDoubleLinkNode2

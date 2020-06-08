@@ -1,4 +1,4 @@
-local BaseGameMode = BaseClass("BaseGameMode", Singleton)
+local BaseGameMode = BaseClass("BaseGameMode")
 
 local function InitGameMode(self)
 	print("InitGameMode ".."BaseGameMode")
@@ -15,6 +15,7 @@ end
 
 local function OnPlayerEnter(self, player)
 	print("OnPlayerEnter ".."BaseGameMode")
+
 end
 
 local function OnPlayerExit(self, player)
